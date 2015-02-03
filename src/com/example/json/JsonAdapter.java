@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,7 +49,11 @@ public class JsonAdapter extends ArrayAdapter<Json>{
 		holder.textView.setText(item.date);
 		holder.textView1.setText(item.author);
 		holder.textView2.setText(item.topic);
-		holder.imageView.setImageURI(Uri.parse(item.image_url));
+		DownloadImageTask imagetask=new DownloadImageTask(item.image);
+		imagetask.execute(item.image_url);
+		holder.imageView.setImageBitmap(item.image);
+		//holder.imageView.setImageResource(R.id.)
+		//holder.imageView.setImageURI(Uri.parse(item.image_url));
 		holder.textView4.setText(item.text);
 		
 		return row;
